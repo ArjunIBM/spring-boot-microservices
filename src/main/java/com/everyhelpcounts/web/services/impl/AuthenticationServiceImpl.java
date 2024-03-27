@@ -62,9 +62,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                final User userCopy = user;
                strRoles.forEach(role -> {
                    switch (role) {
-                       case "admin": addUserRole(userCopy, roles, ERole.ROLE_ADMIN);
+                       case "ROLE_ADMIN": addUserRole(userCopy, roles, ERole.ROLE_ADMIN);
                            break;
-                       case "mod": addUserRole(userCopy, roles, ERole.ROLE_MODERATOR);
+                       case "ROLE_MODERATOR": addUserRole(userCopy, roles, ERole.ROLE_MODERATOR);
                            break;
                        default: addUserRole(userCopy, roles, ERole.ROLE_USER);
                            break;

@@ -62,8 +62,8 @@ public class UserRoleRepositoryImpl implements UserRoleRepository {
         if (keyHolder.getKeys() != null && !keyHolder.getKeys().isEmpty()) {
             Map<String, Object> keys = keyHolder.getKeys();
             role = new Role();
-            role.setId((Long) keys.get("id"));
-            role.setName(ERole.valueOf((String) keys.get("name")));
+            role.setId(((Integer) keys.get("id")).longValue());
+            role.setName(name);
         }
         return role;
     }

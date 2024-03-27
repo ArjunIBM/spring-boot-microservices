@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User registerUser(User user) {
 
-        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO users (username, email, password, status_cd) VALUES (?, ?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -42,15 +42,16 @@ public class UserRepositoryImpl implements UserRepository {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getPassword());
+            ps.setString(4, "A");
             return ps;
         }, keyHolder);
 
-        if (keyHolder.getKeys() != null && !keyHolder.getKeys().isEmpty()) {
+        if ((keyHolder.getKeys() != null) && !keyHolder.getKeys().isEmpty()) {
             Map<String, Object> keys = keyHolder.getKeys();
             user.setId((Long) keys.get("id"));
             user.setStatus((String) keys.get("status_cd"));
             user.setPassword((String) keys.get("password"));
-            user.setRegistrationDate(CommonUtil.convertFromSQLDateToJAVADate((java.sql.Date) keys.get("registrationDate")));
+            user.setRegistrationDate(CommonUtil.convertFromSQLDateToJAVADate((java.sql.Timestamp) keys.get("registration_date")));
         }
 
         return user;
